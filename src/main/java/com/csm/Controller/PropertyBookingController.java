@@ -47,6 +47,7 @@ public class PropertyBookingController {
 		System.out.println("Property Details : " + property);
 		System.out.println("Property Registration Details : " + propertyRegistration);
 		System.out.println("Id Proof : " + idProof );
+		System.out.println("Property RegistrationId : " + registrationId);
 		if (registrationId != null){
 			String applicantIdUploadPath = CommonFileUpload.singleFileUplaod(idProof, "idProof");
 			propertyRegistration.setPropertyRegistrationId(Integer.parseInt(registrationId));

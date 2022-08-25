@@ -52,7 +52,16 @@
                         </div>
                         <input type="hidden" name="housingProject" id="housingProject">
                         <input type="hidden" name="propertyName" id="propertyName">
-                        <input type="hidden" name="registrationId" id="propertyRegistrationId" value="${propertyRegistration.propertyRegistrationId}">
+
+                        <c:choose>
+                            <c:when test = "${propertyRegistration ne null}">
+                                <input type="hidden" name="registrationId" id="propertyRegistrationId" value="${propertyRegistration.propertyRegistrationId}">
+                            </c:when>
+                            <c:otherwise>
+                                <input type="hidden" name="registrationId" id="propertyRegistrationId" value="0">
+                            </c:otherwise>
+                        </c:choose>
+<%--                        <input type="hidden" name="registrationId" id="propertyRegistrationId" value="${propertyRegistration.propertyRegistrationId}">--%>
 
                         <div class="col-md-4 control-label">
                             <label for="propertyType" class="form-label control-label">Property Type</label>
