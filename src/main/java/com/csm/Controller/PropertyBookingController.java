@@ -4,7 +4,6 @@ import com.csm.Model.Property;
 import com.csm.Model.PropertyRegistration;
 import com.csm.Service.MainService;
 import com.csm.Utils.CommonFileUpload;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +49,7 @@ public class PropertyBookingController {
 		System.out.println("Id Proof : " + idProof );
 		if (registrationId != null){
 			String applicantIdUploadPath = CommonFileUpload.singleFileUplaod(idProof, "idProof");
+			propertyRegistration.setPropertyRegistrationId(Integer.parseInt(registrationId));
 			propertyRegistration.setProperty(property);
 			propertyRegistration.setApplicantIdUploadPath(applicantIdUploadPath);
 			saveProperyRegistration =  mainService.savePropertyRegistration(propertyRegistration);
@@ -71,6 +71,10 @@ public class PropertyBookingController {
 		System.out.println("Inside Edit Property Registration----------->");
 		PropertyRegistration propertyRegistration = mainService.getPropertyRegistrationByPropertyRegistrationId(propertyRegistrationId);
 		System.out.println("Property Registration Details : " + propertyRegistration);
+		List<Property> propertyList = mainService.getAllProperty();
+		List<PropertyRegistration> propertyRegistrationList = mainService.getAllPropertyRegistration();
+		model.addAttribute("propertyList", propertyList);
+		model.addAttribute("propertyRegistrationList", propertyRegistrationList);
 		model.addAttribute("propertyRegistration", propertyRegistration);
 		return "propertyRegistration";
 	}
