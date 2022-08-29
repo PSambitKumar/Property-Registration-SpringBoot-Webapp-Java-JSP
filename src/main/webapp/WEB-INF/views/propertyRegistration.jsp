@@ -16,7 +16,7 @@
 <%--    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>--%>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Property Registration</title>
 </head>
 <body style="margin: 2rem;">
@@ -311,8 +311,14 @@
                        $('#dob').css('border-color', 'green');
                        $('#dob').attr('placeholder', '');
 
-                       $('#propertyRegistrationId').submit();
-
+                       let confirm = window.confirm("Are you sure!! You want to submit?");
+                       if (confirm == true) {
+                           console.log("Inside Confirm Pass.");
+                           $('#propertyRegistrationForm').submit();
+                       } else {
+                           alert("Failed to Submit Form!");
+                           Bootstrap.alert("Failed to Submit Form!");
+                       }
                    }
                }
            }
