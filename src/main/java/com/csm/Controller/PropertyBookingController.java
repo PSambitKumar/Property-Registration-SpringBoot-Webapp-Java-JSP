@@ -88,4 +88,5 @@ public class PropertyBookingController {
 		model.addAttribute("propertyRegistrationList", propertyRegistrationList);
 		return "propertyRegistration";
 	}
+
 }

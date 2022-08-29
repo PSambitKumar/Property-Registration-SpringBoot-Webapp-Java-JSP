@@ -104,7 +104,7 @@
 
                                     <div class="col-md-4 control-label">
                                         <label for="dob" class="form-label control-label">Date of Birth</label>
-                                        <input type="date" name="applicantDOB" class="form-control" id="dob" required value="${propertyRegistration.applicantDOB}"/>
+                                        <input type="date" name="applicantDOB" class="form-control datepicker minimumSize" id="dob" required value="${propertyRegistration.applicantDOB}"/>
                                     </div>
 
                                     <div class="col-md-4 control-label">
@@ -229,8 +229,96 @@
     }
 
     function validateForm(){
-        $('#propertyRegistrationForm').submit();
+
+       let name = $('#name').val();
+       let email = $('#email').val();
+       let phone = $('#mobile').val();
+       let dob = $('#dob').val();
+
+       let nameRegx = /^[a-zA-Z ]+$/;
+       let emailRegx = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+       let phoneRegx = /^[0-9]{10}$/;
+
+       let today = new Date();
+
+       if (name == null || name == "") {
+           alert("Name must be filled out");
+           $('#name').focus();
+           $('#name').css('border-color', 'red');
+           $('#name').attr('placeholder', 'Please enter name');
+           return false;
+       } else if (!nameRegx.test(name)) {
+           alert("Name must be alphabets");
+           $('#name').focus();
+           $('#name').css('border-color', 'red');
+           $('#name').attr('placeholder', 'Please enter valid name');
+           return false;
+       } else if (name.length<3 || name.length > 30){
+           alert("Name must be between 3 and 30 characters");
+           $('#name').focus();
+           $('#name').css('border-color', 'red');
+           $('#name').attr('placeholder', 'Name should be between 3 to 30 characters');
+       } else {
+           $('#name').css('border-color', 'green');
+           $('#name').attr('placeholder', '');
+
+           if (email == null || email == "") {
+               alert("Email must be filled out");
+               $('#email').focus();
+               $('#email').css('border-color', 'red');
+               $('#email').attr('placeholder', 'Please enter email');
+               return false;
+           } else if (!emailRegx.test(email)) {
+               alert("Email must be valid");
+               $('#email').focus();
+               $('#email').css('border-color', 'red');
+               $('#email').attr('placeholder', 'Please enter valid email');
+               return false;
+           } else {
+               $('#email').css('border-color', 'green');
+               $('#email').attr('placeholder', '');
+
+               if (phone == null || phone == "") {
+                   alert("Phone must be filled out");
+                   $('#mobile').focus();
+                   $('#mobile').css('border-color', 'red');
+                   $('#mobile').attr('placeholder', 'Please enter phone');
+                   return false;
+               } else if (!phoneRegx.test(phone)) {
+                   alert("Phone must be valid");
+                   $('#mobile').focus();
+                   $('#mobile').css('border-color', 'red');
+                   $('#mobile').attr('placeholder', 'Please enter valid phone');
+                   return false;
+               } else {
+                   $('#mobile').css('border-color', 'green');
+                   $('#mobile').attr('placeholder', '');
+
+                   if (dob == null || dob == "") {
+                       alert("Date of birth must be filled out");
+                       $('#dob').focus();
+                       $('#dob').css('border-color', 'red');
+                       $('#dob').attr('placeholder', 'Please enter date of birth');
+                       return false;
+                   }else if (Date.parse(dob) > Date.parse(today)) {
+                       alert("Date of birth must be less than today");
+                       $('#dob').focus();
+                       $('#dob').css('border-color', 'red');
+                       $('#dob').attr('placeholder', 'Please enter valid date of birth');
+                       return false;
+                   } else {
+                       console.log("Inside DOB Pass.");
+                       $('#dob').css('border-color', 'green');
+                       $('#dob').attr('placeholder', '');
+
+                       $('#propertyRegistrationId').submit();
+
+                   }
+               }
+           }
+       }
     }
+
 
 
 </script>
